@@ -9,11 +9,11 @@ pivoted as (
 select 
     order_id,
     {% for payment_method in payment_methods -%}
-    sum(case when payment_method = '(f payment_method }}' then amount else 0 end) as { payment_method }}_amount
+    sum(case when payment_method = '{{ payment_method }}' then amount else 0 end) as {{ payment_method }}_amount
     {%- if not loop.last -%}
         ,
     {%- endif %}
-    {8 endfor -6}
+    {% endfor -%}
 
     from payments
     where status = 'success'
